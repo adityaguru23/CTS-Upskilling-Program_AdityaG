@@ -1,0 +1,68 @@
+Hands-On 7 - Task 2
+Incremental Migrations using Alembic
+
+98. Add New Column
+
+Modified:
+models.py
+
+Added:
+is_active = Column(Boolean, default=True)
+
+Observation:
+- Added a new Boolean column named is_active to the Student model.
+- The column is used to indicate whether a student is currently active.
+
+
+99. Generate Migration
+
+Command:
+python -m alembic revision --autogenerate -m "add is_active to students"
+
+Observation:
+- Alembic compared the updated Student model with the existing database schema.
+- Generated a new migration file for adding the is_active column.
+
+
+100. Inspect Generated Migration
+
+Observation:
+- Opened the generated migration file.
+- Verified that upgrade() adds the is_active column.
+- Verified that downgrade() removes the is_active column.
+
+
+101. Apply Migration
+
+Command:
+python -m alembic upgrade head
+
+Observation:
+- Applied the migration successfully.
+- Verified that the students table now contains the is_active column.
+
+
+102. Add New Table
+
+Modified:
+models.py
+
+Added:
+CourseSchedule model
+
+Observation:
+- Created a new CourseSchedule model with schedule_id, course_id, day_of_week, start_time and end_time.
+- Generated a migration using Alembic.
+- Applied the migration successfully.
+- Verified that the course_schedules table was created in the database.
+
+
+103. View Migration History
+
+Command:
+python -m alembic history --verbose
+
+Observation:
+- Displayed the complete migration history.
+- Verified that all migration revisions are listed in order.
+- Confirmed that the database schema is updated to the latest version.

@@ -1,0 +1,69 @@
+Hands-On 7 - Task 1
+Alembic Setup and Initial Migration
+
+92. Initialize Alembic
+
+Command:
+python -m alembic init migrations
+
+Observation:
+- Alembic was initialized successfully.
+- Created alembic.ini configuration file.
+- Created migrations folder with env.py, script.py.mako and versions directory.
+
+
+93. Configure Database Connection
+
+Modified:
+alembic.ini
+
+Observation:
+- Updated sqlalchemy.url with the MySQL connection string.
+- Alembic can now connect to the college_db_orm database.
+
+
+94. Configure Metadata
+
+Modified:
+migrations/env.py
+
+Syntax:
+from models import Base
+
+target_metadata = Base.metadata
+
+Observation:
+- Imported Base from models.py.
+- Set target_metadata to Base.metadata.
+- Alembic can now detect all ORM models.
+
+
+95. Generate Initial Migration
+
+Command:
+python -m alembic revision --autogenerate -m "initial schema"
+
+Observation:
+- Alembic compared the ORM models with the database.
+- Generated the initial migration file inside migrations/versions/.
+- The migration contains the required schema changes.
+
+
+96. Inspect Generated Migration
+
+Observation:
+- Opened the generated migration file.
+- Verified that both upgrade() and downgrade() functions were created.
+- Confirmed the migration is ready to be applied.
+
+
+97. Apply Migration
+
+Command:
+python -m alembic upgrade head
+
+Observation:
+- Applied the migration successfully.
+- Created the alembic_version table.
+- Database schema is now synchronized with the SQLAlchemy models.
+- Current migration is updated to the latest revision.
